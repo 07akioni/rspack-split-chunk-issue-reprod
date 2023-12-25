@@ -1,5 +1,5 @@
 {
-  "name": "0_3_14",
+  "name": "0_4_4",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,8 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@rspack/cli": "0.3.14",
-    "@rspack/core": "0.3.14",
+    "@rspack/cli": "0.4.4",
+    "@rspack/core": "0.4.4",
     "@types/node": "^20.10.3",
     "prismjs": "^1.29.0",
     "ts-node": "^10.9.1"

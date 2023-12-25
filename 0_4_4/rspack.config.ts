@@ -1,5 +1,6 @@
 import path = require("path");
 import rspack = require("@rspack/cli");
+import rspackCore = require("@rspack/core");
 import highlightConfig = require("./config");
 
 // eslint-disable-next-line import/no-default-export
@@ -14,6 +15,12 @@ export default rspack.defineConfig({
     path: path.resolve(__dirname, "dist"),
   },
   builtins: {
+    html: [
+      {
+        templateContent:
+          "<!DOCTYPE html><html><head></head><body></body></html>",
+      },
+    ],
     define: {
       __NODE_ENV__: JSON.stringify(process.env.NODE_ENV),
       __DEPLOY_ENV__: JSON.stringify(process.env.DEPLOY_ENV),
@@ -22,7 +29,16 @@ export default rspack.defineConfig({
     },
   },
   module: {
-    rules: [],
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: [
+          {
+            loader: "builtin:swc-loader",
+          },
+        ],
+      },
+    ],
   },
   optimization: {
     splitChunks: {
@@ -34,19 +50,23 @@ export default rspack.defineConfig({
             )}).min`
           ),
           priority: 1,
-          name: 'p0-[contenthash]'
+          name: "p-[chunkhash]",
         },
         prismJs1: {
           test: /node_modules\/prismjs\/components\/prism-(a|b|c|d)/,
+          name: "p1-[chunkhash]",
         },
         prismJs2: {
           test: /node_modules\/prismjs\/components\/prism-(e|f|g|h|i|j|k|l)/,
+          name: "p2-[chunkhash]",
         },
         prismJs3: {
           test: /node_modules\/prismjs\/components\/prism-(m|n|o|p|q|r)/,
+          name: "p3-[chunkhash]",
         },
         prismJs4: {
           test: /node_modules\/prismjs\/components\/prism-(s|t|u|v|w|x|y|z)/,
+          name: "p4-[chunkhash]",
         },
       },
     },

@@ -14,6 +14,12 @@ export default rspack.defineConfig({
     path: path.resolve(__dirname, "dist"),
   },
   builtins: {
+    html: [
+      {
+        templateContent:
+          "<!DOCTYPE html><html><head></head><body></body></html>",
+      },
+    ],
     define: {
       __NODE_ENV__: JSON.stringify(process.env.NODE_ENV),
       __DEPLOY_ENV__: JSON.stringify(process.env.DEPLOY_ENV),
@@ -34,18 +40,23 @@ export default rspack.defineConfig({
             )}).min`
           ),
           priority: 1,
+          name: "p-[contenthash]",
         },
         prismJs1: {
           test: /node_modules\/prismjs\/components\/prism-(a|b|c|d)/,
+          name: "p1-[chunkhash]",
         },
         prismJs2: {
           test: /node_modules\/prismjs\/components\/prism-(e|f|g|h|i|j|k|l)/,
+          name: "p2-[chunkhash]",
         },
         prismJs3: {
           test: /node_modules\/prismjs\/components\/prism-(m|n|o|p|q|r)/,
+          name: "p3-[chunkhash]",
         },
         prismJs4: {
           test: /node_modules\/prismjs\/components\/prism-(s|t|u|v|w|x|y|z)/,
+          name: "p4-[chunkhash]",
         },
       },
     },
